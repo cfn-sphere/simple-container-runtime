@@ -30,18 +30,18 @@ Python 3 is required
  
 ## Run it
 
-    scr my-config-file
+    scr run [options] my-config-file
     
 ### Examples
     
 #### load configuration from filesystem
-    scr /etc/my-app-config.yaml
+    scr run /etc/my-app-config.yaml
     
 #### load configuration from S3
-    scr s3://my-bucket/my-app-config.json
+    scr run s3://my-bucket/my-app-config.json
 
 #### Get configuration from any http(s) server
-    scr http://my-infrastructure.service/my-app-config.yaml
+    scr run http://my-infrastructure.service/my-app-config.yaml
     
 #### Run on an EC2 instance and get configuration from instance user-data
-    scr http://169.254.169.254/latest/user-data
+    scr run http://169.254.169.254/latest/user-data
