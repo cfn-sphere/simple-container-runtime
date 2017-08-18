@@ -1,0 +1,29 @@
+from botocore.exceptions import ClientError
+
+
+class ScrBaseException(Exception):
+    pass
+
+
+class ScrBotoError(ScrBaseException):
+    def __init__(self, e):
+        self.boto_exception = e
+        self.pretty_string = str(e)
+        self.is_throttling_exception = False
+
+        if isinstance(e, ClientError):
+            self.parse_boto_client_error(e)
+
+    def parse_boto_client_error(self, e):
+        response = e.response
+        error = response["Error"]
+        code = error["Code"]
+        message = error["Message"]
+
+        self.pretty_string = "{0}: {1}".format(code, message)
+
+        if code == "Throttling":
+            self.is_throttling_exception = True
+
+    def __str__(self):
+        return self.pretty_string
