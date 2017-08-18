@@ -23,6 +23,10 @@ This project uses pybuilder as build tool.
     pip install pybuilder
     pyb install_dependencies
     pyb
+
+## Requirements
+
+Python 3 is required
  
 ## Run it
 
