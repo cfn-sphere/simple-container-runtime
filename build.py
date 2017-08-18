@@ -7,6 +7,7 @@ use_plugin("python.flake8")
 use_plugin("python.coverage")
 use_plugin("python.distutils")
 use_plugin("copy_resources")
+use_plugin('filter_resources')
 
 name = "simple-container-runtime"
 
