@@ -1,5 +1,9 @@
 # SCR - Simple-Container-Runtime
 
+[![Build Status](https://travis-ci.org/cfn-sphere/simple-container-runtime.svg?branch=master)](https://travis-ci.org/cfn-sphere/simple-container-runtime)
+
+[![Code Health](https://landscape.io/github/cfn-sphere/simple-container-runtime/master/landscape.svg?style=flat)](https://landscape.io/github/cfn-sphere/simple-container-runtime/master)
+
 This project aims to be a really simple solution to run Docker containers on AWS EC2 instances.
 
 ### Why
