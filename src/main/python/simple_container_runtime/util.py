@@ -6,15 +6,6 @@ from functools import wraps
 from simple_container_runtime.exceptions import ScrBotoError
 
 
-def get_logger(root=False):
-    logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s: %(message)s',
-                        datefmt='%d.%m.%Y %H:%M:%S')
-    if root:
-        return logging.getLogger('scr')
-    else:
-        return logging.getLogger('scr.{0}'.format(__name__))
-
-
 def timed(function):
     logger = logging.getLogger(__name__)
 
