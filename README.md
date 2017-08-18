@@ -26,7 +26,7 @@ This project uses pybuilder as build tool.
     
 ### Examples
     
-#### load configuration filesystem
+#### load configuration from filesystem
     scr /etc/my-app-config.yaml
     
 #### load configuration from S3
