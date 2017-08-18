@@ -9,7 +9,7 @@ from simple_container_runtime.api import run_from_config_path
 LOGGER = get_logger(root=True)
 
 
-@click.group(help="Simple container runtime is intended to be a really simple solution to run docker containers.")
+@click.group(help="Simple-Container-Runtime (SCR) is intended to be a really simple solution to run docker containers.")
 @click.version_option(version=__version__)
 def cli():
     pass
