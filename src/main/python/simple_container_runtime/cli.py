@@ -35,3 +35,7 @@ def run(url, debug):
         LOGGER.error("Failed with unexpected error")
         LOGGER.exception(e)
         sys.exit(1)
+
+
+def main():
+    cli()
