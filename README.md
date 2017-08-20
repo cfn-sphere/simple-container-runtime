@@ -32,7 +32,7 @@ Python 3 is required
 
 A Package is available at the Python Package Index: https://pypi.python.org/pypi?name=simple-container-runtime&:action=display
 
-   pip install simple-container-runtime
+    pip install simple-container-runtime
  
 ## Run it
 
