@@ -16,7 +16,7 @@ description = "Simple-Container-Runtime - simply run docker containers"
 license = "APACHE LICENSE, VERSION 2.0"
 summary = "Simple-Container-Runtime - simply run docker containers"
 url = "https://github.com/cfn-sphere/simple-container-runtime"
-version = "0.1.1"
+version = "0.0.1"
 
 default_task = "publish"
 
@@ -37,5 +37,5 @@ def set_properties(project):
     project.set_property("install_dependencies_upgrade", True)
     project.set_property("coverage_break_build", False)
 
-    project.get_property('filter_resources_glob').extend(['**/cfn_sphere/__init__.py'])
+    project.get_property('filter_resources_glob').extend(['**/simple_container_runtime/__init__.py'])
     project.set_property('distutils_console_scripts', ['cf=simple_container_runtime.cli:main'])
