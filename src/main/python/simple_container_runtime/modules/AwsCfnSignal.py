@@ -19,7 +19,7 @@ class AwsCfnSignal(SignalModule):
         else:
             status = "FAILURE"
 
-        boto3.client("cloudformation").signal_resource(
+        boto3.client("cloudformation", region_name=self.region).signal_resource(
             StackName=self.stack_name,
             LogicalResourceId=self.logical_resource_id,
             UniqueId=self.instance_id,
