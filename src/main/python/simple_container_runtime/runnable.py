@@ -60,7 +60,7 @@ class Runnable(object):
 
     def _send_signals(self, config: dict, successful: bool):
         signal_config = config["signals"]
-        signal_modules = {"cfn": AwsCfnSignal}
+        signal_modules = {"AwsCfn": AwsCfnSignal}
 
         if signal_config:
             self._execute_modules(signal_modules, signal_config,

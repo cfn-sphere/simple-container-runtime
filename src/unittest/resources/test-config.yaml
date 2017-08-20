@@ -13,7 +13,7 @@ healthchecks:
 
 # signals to be send to inform the outside world about the status of this composition
 signals:
-#  - cfn:
+#  - AwsCfn:
 #      region: eu-west-1
 #      stack_name: my-stack
 #      logical_resource_id: my-asg

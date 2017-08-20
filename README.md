@@ -45,3 +45,53 @@ Python 3 is required
     
 #### Run on an EC2 instance and get configuration from instance user-data
     scr run http://169.254.169.254/latest/user-data
+    
+## Example Config Yaml
+
+    # things to be done before composition starts
+    pre_start:
+      - AwsEcrLogin:
+          region: eu-west-1
+          account_id: 123456789123
+    
+    #health checks to be made executed the composition started to verify its health
+    healthchecks:
+      - http:
+          port: 8000
+      - AwsElb:
+          loadbalancer_name: my-alb
+    
+    # signals to be send to inform the outside world about the status of this composition
+    signals:
+      - AwsCfn:
+          region: eu-west-1
+          stack_name: my-stack
+          logical_resource_id: my-asg
+    
+    #plain docker-compose yaml
+    docker-compose:
+        version: '2'
+        services:
+           db:
+             image: mysql:5.7
+             volumes:
+               - db_data:/var/lib/mysql
+             restart: always
+             environment:
+               MYSQL_ROOT_PASSWORD: wordpress
+               MYSQL_DATABASE: wordpress
+               MYSQL_USER: wordpress
+               MYSQL_PASSWORD: wordpress
+    
+           wordpress:
+             depends_on:
+               - db
+             image: wordpress:latest
+             ports:
+               - "8000:80"
+             restart: always
+             environment:
+               WORDPRESS_DB_HOST: db:3306
+               WORDPRESS_DB_PASSWORD: wordpress
+        volumes:
+            db_data:
