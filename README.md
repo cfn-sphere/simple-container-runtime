@@ -27,6 +27,12 @@ This project uses pybuilder as build tool.
 ## Requirements
 
 Python 3 is required
+
+## Install it
+
+A Package is available at the Python Package Index: https://pypi.python.org/pypi?name=simple-container-runtime&:action=display
+
+   pip install simple-container-runtime
  
 ## Run it
 
