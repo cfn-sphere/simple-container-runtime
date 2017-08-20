@@ -1,12 +1,24 @@
 sudo: false
 language: python
 python:
-  - '3.3'
-  - '3.4'
-  - '3.5'
-  - '3.6'
+  - "3.3"
+  - "3.4"
+  - "3.5"
 install:
-  - pip install pip pybuilder coveralls --upgrade
-  - pyb install_dependencies
+  - "pip install pip pybuilder coveralls --upgrade"
+  - "pyb install_dependencies"
 script:
-  - pyb -X run_unit_tests
+  - "pyb -X run_unit_tests"
+before_deploy:
+  - "pyb -X package"
+deploy:
+  provider: pypi
+  user: marco-hoyer
+  password:
+    secure: "RssLvrEyywcaDARZ6mAfrFhzZ+r5GQgaenkHbQks2sWo/jR2rKgboE5QnfvdmoXULtqLcbnZnaXn8WCxzw41uq26CdJXCf3u++/5vR7voe0Suy9Oyee/xtxm4rt0oQKzlktOpc+aC0Mu4FDnj8Gm2pA3nHAQG4wquIvoNQwYyWhLRjHGi+VswuU8JrK5b9qceLEARV9tEk3Y94+yqIGd4qk+sQfoX3wgsUTVt8h8QpCvu6WorTRup6QF1K9JKI2vKAd2/MayS77LJKF4nU43bux2qnNczKH7IEEFiMHr5hjx5aXX+3woN9kraV6JRvSpx4EdLGN4KdFAbUsEaWRFxk10ebTO96SRI8RqnYVOfh8naDm+B41180ozrZpT3vydpG1DBjAKJVvib4jEjbRNqC1/IXuRbBCg8lCjNsnqfEBx0q3eLSlWO9oBvFB8miq3sFkGFbweXWsbaQIMku1m7cHwJE6M55iiS8sMKJlqlnoacAZ3QiOTTYe6yB8eZ8C5nS7tuPQtXYAv9kNSAjTp2XLZbZhuWvdzWsEgr9s2tj5c2CGP37q3AOsJL06y21j+wbvZBZ108tIyqUcUGIsHuOpGBLTZVg68LkUyTVC7fEl8c/axc/tdRbJPDqSJILuLA1lOTLb+4kH42LjD1H6TX4r1GD8+SPFtVaT0hROIJWo="
+  distributions: sdist
+  skip_cleanup: true
+  on:
+    repo: cfn-sphere/simple-container-runtime
+    branch: stable
+    python: "3.5"
