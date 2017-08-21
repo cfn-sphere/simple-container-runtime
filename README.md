@@ -50,6 +50,9 @@ A Package is available at the Python Package Index: https://pypi.python.org/pypi
     scr run http://my-infrastructure.service/my-app-config.yaml
     
 #### Run on an EC2 instance and get configuration from instance user-data
+
+This is the prefered way to configure scr on EC2 instances. You can use cfn-sphere to simply create AWS CloudFormation templates properly configuring user-data.
+
     scr run http://169.254.169.254/latest/user-data
     
 ## Example Config Yaml
