@@ -16,7 +16,7 @@ description = "Simple-Container-Runtime - simply run docker containers"
 license = "APACHE LICENSE, VERSION 2.0"
 summary = "Simple-Container-Runtime - simply run docker containers"
 url = "https://github.com/cfn-sphere/simple-container-runtime"
-version = "0.0.1"
+version = "0.0.2"
 
 default_task = "publish"
 

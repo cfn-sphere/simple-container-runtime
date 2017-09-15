@@ -33,23 +33,23 @@ class Runnable(object):
         try:
             self._register_stop_callbacks()
 
-            self._execute_pre_start_modules(self.config)
+            self._execute_pre_start_modules()
 
             self._write_compose_config(self.config, work_dir)
             DockerCompose(work_dir).up()
 
-            self._execute_health_checks(self.config)
+            self._execute_health_checks()
         except Exception as e:
             self.logger.error("Start process failed")
-            self._send_signals(self.config, successful=False)
+            self._send_signals(successful=False)
             raise e
 
-        self._send_signals(self.config, successful=True)
+        self._send_signals(successful=True)
         self.logger.info("Startup finished")
         os_signal.pause()
 
-    def _execute_pre_start_modules(self, config: dict):
-        pre_start_config = config["pre_start"]
+    def _execute_pre_start_modules(self):
+        pre_start_config = self.config.get("pre_start")
         pre_start_modules = {"AwsEcrLogin": AwsEcrLogin}
 
         if pre_start_config:
@@ -58,8 +58,8 @@ class Runnable(object):
         else:
             self.logger.info("No pre-start modules configured")
 
-    def _send_signals(self, config: dict, successful: bool):
-        signal_config = config["signals"]
+    def _send_signals(self, successful: bool):
+        signal_config = self.config.get("signals")
         signal_modules = {"AwsCfn": AwsCfnSignal}
 
         if signal_config:
@@ -71,8 +71,8 @@ class Runnable(object):
         else:
             self.logger.info("No signals configured")
 
-    def _execute_health_checks(self, config: dict):
-        healthcheck_config = config["healthchecks"]
+    def _execute_health_checks(self):
+        healthcheck_config = self.config.get("healthchecks")
         healthcheck_modules = {
             "AwsElb": AwsElbHealthCheck,
             "http": HttpHealthCheck
@@ -86,6 +86,9 @@ class Runnable(object):
 
     def _execute_modules(self, known_modules: dict, config: List[dict], execution_args: dict, kind: str):
         for module_config in config:
+            assert isinstance(module_config, dict), \
+                "Config value for {} must be a dictionary, not {}".format(kind, type(module_config))
+
             name = list(module_config.keys())[0]
             config = module_config[name]
             self.logger.info("Executing {}".format(name))
