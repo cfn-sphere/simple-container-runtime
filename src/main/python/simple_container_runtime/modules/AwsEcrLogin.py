@@ -1,7 +1,7 @@
 import os
 import boto3
 import json
-from pathlib import Path
+from pathlib2 import Path
 from simple_container_runtime.modules.Module import PreStartModule
 from simple_container_runtime.util import get_logger
 

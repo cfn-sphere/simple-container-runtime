@@ -25,6 +25,7 @@ default_task = "publish"
 def set_properties(project):
     project.depends_on("sh")
     project.depends_on("click")
+    project.depends_on("pathlib2")
     project.depends_on("requests")
     project.depends_on("boto3")
     project.depends_on("PyYAML")
