@@ -1,9 +1,7 @@
 import os
 import signal as os_signal
 import tempfile
-
 import yaml
-from typing import List, Dict
 
 from simple_container_runtime.modules.AwsEcrLogin import AwsEcrLogin
 from simple_container_runtime.util import get_logger
@@ -84,7 +82,7 @@ class Runnable(object):
         else:
             self.logger.info("No health checks configured")
 
-    def _execute_modules(self, known_modules: dict, config: List[dict], execution_args: dict, kind: str):
+    def _execute_modules(self, known_modules: dict, config: list, execution_args: dict, kind: str):
         for module_config in config:
             assert isinstance(module_config, dict), \
                 "Config value for {} must be a dictionary, not {}".format(kind, type(module_config))
