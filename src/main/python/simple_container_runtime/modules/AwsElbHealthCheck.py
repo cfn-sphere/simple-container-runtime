@@ -3,7 +3,7 @@ import boto3
 from time import sleep
 
 from simple_container_runtime.modules.Module import HealthCheckModule
-from simple_container_runtime.util import get_instance_id
+from simple_container_runtime.util import get_instance_id, with_boto_retry
 
 
 class AwsElbHealthCheck(HealthCheckModule):
@@ -19,6 +19,7 @@ class AwsElbHealthCheck(HealthCheckModule):
         if not self.is_in_service_from_elb_perspective(self.instance_id, self.loadbalancer_name):
             raise Exception("Failed to wait for the instance to stabilize")
 
+    @with_boto_retry()
     def _get_elb_instance_state(self, instance_id: str, elb_name: str):
         client = boto3.client('elb', region_name=self.region)
         result = client.describe_instance_health(LoadBalancerName=elb_name, Instances=[{"InstanceId": instance_id}])

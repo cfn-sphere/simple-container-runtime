@@ -6,7 +6,7 @@ from simple_container_runtime.modules.Module import HealthCheckModule
 from simple_container_runtime.util import get_logger
 
 
-class HttpHealthCheck(HealthCheckModule):
+class LocalHttpHealthCheck(HealthCheckModule):
     def __init__(self, config: dict):
         super().__init__(config)
 

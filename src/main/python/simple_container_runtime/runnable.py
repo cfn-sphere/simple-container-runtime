@@ -8,7 +8,7 @@ from simple_container_runtime.util import get_logger
 from simple_container_runtime.exceptions import ScrBaseException
 from simple_container_runtime.file_reader import FileLoader
 from simple_container_runtime.docker import DockerCompose
-from simple_container_runtime.modules.Http import HttpHealthCheck
+from simple_container_runtime.modules.LocalHttpHealthCheck import LocalHttpHealthCheck
 from simple_container_runtime.modules.AwsElbHealthCheck import AwsElbHealthCheck
 from simple_container_runtime.modules.AwsCfnSignal import AwsCfnSignal
 
@@ -38,7 +38,7 @@ class Runnable(object):
 
             self._execute_health_checks()
         except Exception as e:
-            self.logger.error("Start process failed")
+            self.logger.error("Startup failed")
             self._send_signals(successful=False)
             raise e
 
@@ -73,7 +73,7 @@ class Runnable(object):
         healthcheck_config = self.config.get("healthchecks")
         healthcheck_modules = {
             "AwsElb": AwsElbHealthCheck,
-            "http": HttpHealthCheck
+            "LocalHttp": LocalHttpHealthCheck
         }
 
         if healthcheck_config:

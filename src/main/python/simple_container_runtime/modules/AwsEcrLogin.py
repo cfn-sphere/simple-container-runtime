@@ -3,7 +3,7 @@ import boto3
 import json
 from pathlib2 import Path
 from simple_container_runtime.modules.Module import PreStartModule
-from simple_container_runtime.util import get_logger
+from simple_container_runtime.util import get_logger, with_boto_retry
 
 
 class AwsEcrLogin(PreStartModule):
@@ -11,9 +11,11 @@ class AwsEcrLogin(PreStartModule):
         super().__init__(config)
 
         self.logger = get_logger("AwsEcrLogin")
+
         self.region = config["region"]
         self.account_id = str(config["account_id"])
 
+    @with_boto_retry()
     def run(self):
         response = boto3.client("ecr", region_name=self.region).get_authorization_token(
             registryIds=[self.account_id]

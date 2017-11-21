@@ -3,6 +3,8 @@ import time
 import requests
 from functools import wraps
 
+from botocore.exceptions import ClientError, BotoCoreError
+
 from simple_container_runtime.exceptions import ScrBotoError
 
 
@@ -51,13 +53,15 @@ def with_boto_retry(max_retries=3, pause_time_multiplier=5):
             while True:
                 try:
                     return function(*args, **kwds)
-                except ScrBotoError as e:
-                    if not e.is_throttling_exception or retries >= max_retries:
+                except (BotoCoreError, ClientError) as e:
+                    wrapped_exception = ScrBotoError(e)
+                    if not wrapped_exception.is_throttling_exception or retries >= max_retries:
                         raise e
 
                     sleep_time = pause_time_multiplier * (2 ** retries)
-                    logger.warn(
-                        "{0} call failed with: '{1}' (Will retry in {2}s)".format(function.__name__, e, sleep_time))
+                    logger.warning(
+                        "{0} call failed with: '{1}' (Will retry in {2}s)".format(function.__name__, wrapped_exception,
+                                                                                  sleep_time))
                     time.sleep(sleep_time)
                     retries += 1
 

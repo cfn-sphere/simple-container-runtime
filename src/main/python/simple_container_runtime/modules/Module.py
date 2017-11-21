@@ -12,6 +12,7 @@ class PreStartModule(Module):
     def run(self):
         pass
 
+
 class HealthCheckModule(Module):
     @abstractmethod
     def run(self):

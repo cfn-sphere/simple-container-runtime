@@ -6,7 +6,7 @@ pre_start:
 
 #health checks to be made after the composition started
 healthchecks:
-  - http:
+  - LocalHttp:
       port: 8000
 #  - AwsAlb:
 #      loadbalancer_name: my-alb
