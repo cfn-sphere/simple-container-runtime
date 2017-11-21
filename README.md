@@ -16,6 +16,16 @@ Don't get me wrong, SCR is not specifically intended to run all containers on a 
 
 SCR is build around docker-compose. Users can simply use a docker-compose.yaml file stored in S3, on filesystem or any reachable webserver run their app. One can extend the config for specific use cases like health checks, instance preparation, status signaling and so on but in the end it is up to your usecase. Stick with a simple plain docker-compose config or use all the modules available.
 
+## Give it a try
+
+All theory is gray. Give it a try without a lot of hazzle. Let SCR start a container with wordpress and another one with mysql for you:
+
+    pip install scr
+    scr run quickstart/wordpress-with-mysql.yaml
+    
+After some time waiting for the images to load scr finally executes a local heathcheck to make sure that wordpress is up and running. 
+You can connect on [http://localhost:8000](http://localhost:8000). Simply press CTRL+C to gracefully stop everything.
+
 ## Build it
 
 This project uses pybuilder as build tool.
