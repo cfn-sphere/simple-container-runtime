@@ -25,10 +25,15 @@ def timed(function):
 def get_logger(name: str = None, root: bool = False):
     logging.basicConfig(format='%(asctime)s %(levelname)s %(name)s: %(message)s',
                         datefmt='%d.%m.%Y %H:%M:%S')
+
     if not root and name:
-        return logging.getLogger('scr.{0}'.format(name))
+        logger = logging.getLogger('scr.{0}'.format(name))
+
     else:
-        return logging.getLogger('scr')
+        logger = logging.getLogger('scr')
+
+    logger.setLevel(logging.INFO)
+    return logger
 
 
 def get_instance_id():
